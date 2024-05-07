@@ -51,9 +51,8 @@ IO.on("connection", (socket) => {
     });
   });
 
-  socket.on("userList", (data) => {
-  let connectedUsers = Object.keys(IO.sockets.adapter.rooms);
-  socket.emit("userList", connectedUsers);
+  // Emitir la lista de usuarios conectados a todos los clientes
+  const connectedUsers = Object.keys(IO.sockets.adapter.rooms);
+  IO.emit("userList", connectedUsers);
 });
 
-});
