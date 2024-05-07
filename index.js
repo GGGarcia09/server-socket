@@ -50,6 +50,7 @@ IO.on("connection", (socket) => {
   });
 
   // Emitir la lista de usuarios conectados a todos los clientes
-  const connectedUsers = Object.keys(IO.sockets.adapter.rooms[socket.user].sockets);
+  const userRoom = IO.sockets.adapter.rooms[socket.user];
+  const connectedUsers = userRoom ? Object.keys(userRoom.sockets) : [];
   IO.emit("userList", connectedUsers);
 });
