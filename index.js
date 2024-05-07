@@ -15,8 +15,6 @@ IO.use((socket, next) => {
   }
 });
 
-
-
 IO.on("connection", (socket) => {
   console.log(socket.user, "Connected");
   socket.join(socket.user);
@@ -55,4 +53,3 @@ IO.on("connection", (socket) => {
   const connectedUsers = Object.keys(IO.sockets.adapter.rooms);
   IO.emit("userList", connectedUsers);
 });
-
