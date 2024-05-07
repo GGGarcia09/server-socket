@@ -49,8 +49,12 @@ IO.on("connection", (socket) => {
     });
   });
 
+  // Crear una nueva lista y agregar los identificadores de usuario
+  let connectedUsers = [];
+  IO.sockets.sockets.forEach((userSocket) => {
+    connectedUsers.push(userSocket.user);
+  });
+
   // Emitir la lista de usuarios conectados a todos los clientes
-  const userRoom = IO.sockets.adapter.rooms[socket.user];
-  const connectedUsers = userRoom ? Object.keys(userRoom.sockets) : [];
   IO.emit("userList", connectedUsers);
 });
