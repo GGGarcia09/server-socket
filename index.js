@@ -15,6 +15,8 @@ IO.use((socket, next) => {
   }
 });
 
+
+
 IO.on("connection", (socket) => {
   console.log(socket.user, "Connected");
   socket.join(socket.user);
@@ -48,4 +50,10 @@ IO.on("connection", (socket) => {
       iceCandidate: iceCandidate,
     });
   });
+
+  socket.on("userList", (data) => {
+  let connectedUsers = Object.keys(IO.sockets.adapter.rooms);
+  socket.emit("userList", connectedUsers);
+});
+
 });
